@@ -41,8 +41,6 @@ function love.keyreleased( key, scancode )
 	end
 end
 
-
-
 function love.load()
 
 	res.init({width = 1920, height = 1080, mode = 2})
@@ -90,26 +88,23 @@ end
 function love.update(dt)
 
 	if love.keyboard.isDown("up") then
-		for _, Obj in pairs(OBJECTS) do
-			threederotation.rotateObjectXAxis(Obj, 1)		-- 1 deg
-		end
+		threederotation.rotateObjectXAxis(OBJECTS[SELECTED_OBJECT], 1)		-- 1 deg
 	end
-
 	if love.keyboard.isDown("down") then
-		threederotation.rotateObjectXAxis(OBJECTS[1], -1)		-- 1 deg
+		threederotation.rotateObjectXAxis(OBJECTS[SELECTED_OBJECT], -1)		-- 1 deg
 	end
 
 	if love.keyboard.isDown("left") then
-		threederotation.rotateObjectYAxis(OBJECTS[1], -1)
+		threederotation.rotateObjectYAxis(OBJECTS[SELECTED_OBJECT], -1)
 	end
 	if love.keyboard.isDown("right") then
-		threederotation.rotateObjectYAxis(OBJECTS[1], 1)
+		threederotation.rotateObjectYAxis(OBJECTS[SELECTED_OBJECT], 1)
 	end
 
 	if love.keyboard.isDown("delete") then
-		threederotation.rotateObjectZAxis(OBJECTS[1], -1)
+		threederotation.rotateObjectZAxis(OBJECTS[SELECTED_OBJECT], -1)
 	end
 	if love.keyboard.isDown("pagedown") then
-		threederotation.rotateObjectZAxis(OBJECTS[1], 1)
+		threederotation.rotateObjectZAxis(OBJECTS[SELECTED_OBJECT], 1)
 	end
 end

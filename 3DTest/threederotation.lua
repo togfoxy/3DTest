@@ -51,7 +51,7 @@ local function setNewXY(pt, x2, y2, z2)
 end
 function threederotation.rotateObjectXAxis(Obj, angle)
 
-    -- get the relative x/y for each point and store inside same obj
+    -- get the relative x/y based on centre of object for each point and store inside obj
     getRelativeObject(Obj)
 
     -- transform this new object around its own centre

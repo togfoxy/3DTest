@@ -33,8 +33,12 @@ function constants.load()
     enums.load()
     -- add extra items below this line
 
+    DEV_MODE = true
+    DEV_MODE = false
     OBJECTS = {}
     ISO_MODE = false
+
+    SELECTED_OBJECT = 1
 
 end
 
