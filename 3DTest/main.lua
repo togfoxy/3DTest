@@ -78,8 +78,6 @@ function love.load()
 	-- =============================================
 
 	fun.initialiseObject()
-	-- print(inspect(OBJECTS[1]))
-	-- print("*********")
 end
 
 function love.draw()
@@ -95,11 +93,10 @@ end
 function love.update(dt)
 
 	if love.keyboard.isDown("up") then
-		threederotation.rotateObjectXAxis(OBJECTS[SELECTED_OBJECT], 1)		-- 1 deg
+		fun.rotate(enum.rotateUp)
 	end
 	if love.keyboard.isDown("down") then
-		-- threederotation.rotateObjectXAxis(OBJECTS[SELECTED_OBJECT], -1)		-- 1 deg
-		fun.rotateDown()
+		fun.rotate(enum.rotateDown)
 	end
 
 	if love.keyboard.isDown("left") then
@@ -115,4 +112,12 @@ function love.update(dt)
 	if love.keyboard.isDown("pagedown") then
 		threederotation.rotateObjectZAxis(OBJECTS[SELECTED_OBJECT], 1)
 	end
+
+	if love.keyboard.isDown("w") then
+		fun.MoveForward(dt)
+	end
+	if love.keyboard.isDown("s") then
+		fun.MoveForward(-1 * dt)
+	end
+
 end

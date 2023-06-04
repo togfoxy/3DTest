@@ -184,13 +184,33 @@ function functions.drawObjects()
     end
 end
 
-function functions.rotateDown()
+function functions.rotate(rotationdirection)
+    local angle = 0
+    if rotationdirection == enum.rotateDown then
+        angle = -1
+    elseif rotationdirection == enum.rotateUp then
+        angle = 1
+    else
+        error()
+    end
 
     if SELECTED_OBJECT == enum.partHead then
-        threederotation.rotateObjectXAxis(OBJECTS[1], -1, 3)		-- 1 deg
+        threederotation.rotateObjectXAxis(OBJECTS[1], angle, 3)		-- 1 deg
     elseif SELECTED_OBJECT == enum.partTorso then
-        threederotation.rotateObjectXAxis(OBJECTS[1], -1, 7)		-- 1 deg
-        threederotation.rotateObjectXAxis(OBJECTS[2], -1, 7)		-- 1 deg
+        threederotation.rotateObjectXAxis(OBJECTS[1], angle, 7)		-- 1 deg
+        threederotation.rotateObjectXAxis(OBJECTS[2], angle, 7)		-- 1 deg
+    end
+end
+
+function functions.MoveForward(dt)
+    -- the z axis moves 'forward' into or out of hte screen or 'forward' in iso mode
+    -- accepts a negative value to move backwards
+    for k, Obj in pairs(OBJECTS) do
+        for j, pt in pairs(Obj.points) do
+            -- pt.y = pt.y - dt * 20
+            -- pt.x = pt.x + dt * 20
+            pt.z = pt.z - dt * 20
+        end
     end
 end
 

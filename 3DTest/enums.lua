@@ -18,6 +18,12 @@ function enums.load()
     enum.audioMainMenu = 1
     -- add extra items below this line
 
+    enum.partHead = 1
+    enum.partTorso = 2
+
+    enum.rotateDown = 1
+    enum.rotateUp = 2
+
 
 
 end
