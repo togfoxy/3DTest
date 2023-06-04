@@ -19,7 +19,7 @@ function round(val, decimal)
 	end
 end
 
-function deepcopy(orig, copies)
+function deepCopy(orig, copies)
 	-- copies one array to another array
 	-- ** important **
 	-- copies parameter is not meant to be passed in. Just send in orig as a single parameter
@@ -35,9 +35,9 @@ function deepcopy(orig, copies)
             copy = {}
             copies[orig] = copy
             for orig_key, orig_value in next, orig, nil do
-                copy[deepcopy(orig_key, copies)] = deepcopy(orig_value, copies)
+                copy[deepCopy(orig_key, copies)] = deepCopy(orig_value, copies)
             end
-            setmetatable(copy, deepcopy(getmetatable(orig), copies))
+            setmetatable(copy, deepCopy(getmetatable(orig), copies))
         end
     else -- number, string, boolean, etc
         copy = orig
