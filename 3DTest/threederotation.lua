@@ -12,24 +12,39 @@ function threederotation.getObjectCentre(Obj)
     return sumx / sumpoints, sumy / sumpoints, sumz / sumpoints
 end
 
-local function getRelativeObject(Obj)
-    -- for the given object, normalise the points with respect to the centre of that object
-    -- those those normal points inside the same obj
+local function getPoint(Obj, pointlabel)
+    -- returns a point object or nil
+    -- scans all objects. The Obj param is redundant
 
-    Obj.centrex, Obj.centrey, Obj.centrez = threederotation.getObjectCentre(Obj)
+    for i = 1, #OBJECTS do
+        for j, pt in pairs(OBJECTS[i].points) do
+            if pt.label == pointlabel then
+                return pt
+            end
+        end
+    end
+    return nil
+end
+
+local function getRelativeObject(Obj, pointlabel)
+    -- for the given obect, normalise the points with respect to the given points
+    -- the obect will rotate around this provided point
+
+    -- Obj.centrex, Obj.centrey, Obj.centrez = threederotation.getObjectCentre(Obj)
+
+print(Obj, pointlabel)
+
+    local focuspoint = getPoint(Obj, pointlabel)
+
+print(focuspoint)
+
     local newObj = {}
     newObj.points = {}
     for j, pt in pairs(Obj.points) do
-        thispoint = {}
-        thispoint.x = pt.x
-        thispoint.y = pt.y
-        thispoint.z = pt.z
-        thispoint.label = pt.label
-
         -- normalise thispoint
-        pt.normalx = pt.x - Obj.centrex
-        pt.normaly = pt.y - Obj.centrey
-        pt.normalz = pt.z - Obj.centrez
+        pt.normalx = pt.x - focuspoint.x
+        pt.normaly = pt.y - focuspoint.y
+        pt.normalz = pt.z - focuspoint.z
     end
 end
 
@@ -49,12 +64,13 @@ local function setNewXY(pt, x2, y2, z2)
     pt.z = pt.z + pt.deltaz
 
 end
-function threederotation.rotateObjectXAxis(Obj, angle)
+function threederotation.rotateObjectXAxis(Obj, angle, centrepoint)
+    -- centre point is the point the obj will rotate around
 
     -- get the relative x/y based on centre of object for each point and store inside obj
-    getRelativeObject(Obj)
+    getRelativeObject(Obj, centrepoint)
 
-    -- transform this new object around its own centre
+    -- transform this new object around the nominated centre
     for j, pt in pairs(Obj.points) do
        local x2,y2,z2 = threederotation.rotatePointXAxis(pt, angle)
        setNewXY(pt, x2,y2,z2)

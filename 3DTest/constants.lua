@@ -34,7 +34,7 @@ function constants.load()
     -- add extra items below this line
 
     DEV_MODE = true
-    DEV_MODE = false
+    -- DEV_MODE = false
     OBJECTS = {}
     ISO_MODE = false
 

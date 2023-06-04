@@ -38,6 +38,7 @@ local function initialisePerson()
     local thisobject = {}
     thisobject.points = {}
     thisobject.segments = {}
+    thisobject.objlabel = enum.partHead
     local originx = SCREEN_WIDTH / 2
     local originy = 300
     local originz = 0
@@ -62,6 +63,7 @@ local function initialisePerson()
     local thisobject = {}
     thisobject.points = {}
     thisobject.segments = {}
+    thisobject.objlabel = enum.partTorso
 
     local bodywidth = headwidth * 1.5
     local bodyheight = headheight * 2
@@ -115,6 +117,12 @@ function functions.drawObjects()
     for k, Obj in pairs(OBJECTS) do
         -- draw points
 
+        if Obj.objlabel == SELECTED_OBJECT then
+            love.graphics.setColor(0,1,1,1)
+        else
+            love.graphics.setColor(1,1,1,1)
+        end
+
         if ISO_MODE then
     		threederotation.changeObjectToIsometric(Obj)           -- updates isox and isoy
         end
@@ -126,21 +134,21 @@ function functions.drawObjects()
                     drawx = pt.isox
                     drawy = pt.isoy
 
-                    love.graphics.setColor(1,1,1,1)
+                    -- love.graphics.setColor(1,1,1,1)
                     love.graphics.circle("fill", drawx, drawy, 5)
                 else
                     local drawx = pt.x
                     local drawy = pt.y
 
                     if DEV_MODE then
-                        love.graphics.setColor(1,1,1,1)
+                        -- love.graphics.setColor(1,1,1,1)
                         love.graphics.circle("fill", drawx, drawy, 5)
                     end
 
                     -- draw the centre of the object
                     if DEV_MODE then
                         local centrex, centrey, _ = threederotation.getObjectCentre(Obj)
-                        love.graphics.setColor(1,0,0,1)
+                        -- love.graphics.setColor(1,0,0,1)
                         love.graphics.circle("line", centrex, centrey, 5)
                     end
 
@@ -151,7 +159,7 @@ function functions.drawObjects()
                 end
             end
         end
-        
+
         -- draw segments
         for k, seg in pairs(Obj.segments) do
 
@@ -169,10 +177,20 @@ function functions.drawObjects()
 
             if x1 ~= nil then
 
-                love.graphics.setColor(1,1,1,1)
+                -- love.graphics.setColor(1,1,1,1)
                 love.graphics.line(x1, y1, x2, y2)
             end
         end
+    end
+end
+
+function functions.rotateDown()
+
+    if SELECTED_OBJECT == enum.partHead then
+        threederotation.rotateObjectXAxis(OBJECTS[1], -1, 3)		-- 1 deg
+    elseif SELECTED_OBJECT == enum.partTorso then
+        threederotation.rotateObjectXAxis(OBJECTS[1], -1, 7)		-- 1 deg
+        threederotation.rotateObjectXAxis(OBJECTS[2], -1, 7)		-- 1 deg
     end
 end
 

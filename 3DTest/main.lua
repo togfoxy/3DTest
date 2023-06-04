@@ -39,6 +39,13 @@ function love.keyreleased( key, scancode )
 	if key == "i" then
 		ISO_MODE = not ISO_MODE
 	end
+
+	if key == "1" then
+		SELECTED_OBJECT = 1
+	end
+	if key == "2" then
+		SELECTED_OBJECT = 2
+	end
 end
 
 function love.load()
@@ -91,7 +98,8 @@ function love.update(dt)
 		threederotation.rotateObjectXAxis(OBJECTS[SELECTED_OBJECT], 1)		-- 1 deg
 	end
 	if love.keyboard.isDown("down") then
-		threederotation.rotateObjectXAxis(OBJECTS[SELECTED_OBJECT], -1)		-- 1 deg
+		-- threederotation.rotateObjectXAxis(OBJECTS[SELECTED_OBJECT], -1)		-- 1 deg
+		fun.rotateDown()
 	end
 
 	if love.keyboard.isDown("left") then
