@@ -145,7 +145,7 @@ local function initialisePerson()
 
     local thispoint = {}
     thispoint.x = 1000
-    thispoint.y = 500
+    thispoint.y = 600
     thispoint.z = 0
     thispoint.label = 1
     table.insert(thisobject.points, thispoint)
@@ -158,15 +158,15 @@ local function initialisePerson()
     table.insert(thisobject.points, thispoint)
 
     local thispoint = {}
-    thispoint.x = 950
-    thispoint.y = 875
+    thispoint.x = 975
+    thispoint.y = 800
     thispoint.z = 0
     thispoint.label = 3
     table.insert(thisobject.points, thispoint)
 
     local thispoint = {}
-    thispoint.x = 1050
-    thispoint.y = 875
+    thispoint.x = 1025
+    thispoint.y = 800
     thispoint.z = 0
     thispoint.label = 4
     table.insert(thisobject.points, thispoint)
