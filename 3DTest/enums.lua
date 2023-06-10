@@ -18,6 +18,9 @@ function enums.load()
     enum.audioMainMenu = 1
     -- add extra items below this line
 
+    enum.viewFront = 1
+    enum.viewSide = 2
+
 
 
 end

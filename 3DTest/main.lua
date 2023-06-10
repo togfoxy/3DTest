@@ -41,13 +41,13 @@ function love.keyreleased( key, scancode )
 	end
 end
 
-
-
 function love.load()
 
+	_ = love.window.setFullscreen( true )
 	res.init({width = 1920, height = 1080, mode = 2})
 
-	local width, height = love.window.getDesktopDimensions( 1 )
+	local _, _, flags = love.window.getMode()
+	local width, height = love.window.getDesktopDimensions(flags.display)
 	res.setMode(width, height, {resizable = true})
 
 	constants.load()		-- also loads enums
@@ -79,11 +79,11 @@ end
 
 function love.draw()
     res.start()
-	cam:attach()
+	-- cam:attach()
 
-	fun.drawObjects()
+	fun.drawObjects2()
 
-	cam:detach()
+	-- cam:detach()
     res.stop()
 end
 
@@ -112,4 +112,6 @@ function love.update(dt)
 	if love.keyboard.isDown("pagedown") then
 		threederotation.rotateObjectZAxis(OBJECTS[1], 1)
 	end
+
+	cam:setZoom(ZOOMFACTOR)
 end
