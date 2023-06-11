@@ -59,8 +59,8 @@ function constants.load()
     frontframey = 600
     frontframewidth = 500
     frontframeheight = 450
-    frontframecentrex = topframewidth / 2 + topframex
-    frontframecentrey = topframeheight / 2 + topframey
+    frontframecentrex = frontframewidth / 2 + frontframex
+    frontframecentrey = frontframeheight / 2 + frontframey
 
 end
 

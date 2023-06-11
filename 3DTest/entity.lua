@@ -235,8 +235,8 @@ end
 
 local function drawTopView(pt)
     -- draws one point
-    local drawx = pt.sidex
-    local drawy = pt.sidey
+    local drawx = pt.topx
+    local drawy = pt.topy
 
     love.graphics.setColor(1,1,1,1)
     love.graphics.circle("fill", drawx, drawy, 5)
@@ -256,6 +256,9 @@ local function drawSideView(pt)
 end
 
 local function drawFrontView(pt)
+
+print(inspect(pt))
+
     local drawx = pt.frontx
     local drawy = pt.fronty
 
@@ -264,16 +267,14 @@ local function drawFrontView(pt)
     -- point label (debugging only)
     love.graphics.print(pt.label, drawx + 7, drawy + 4)
 
-
 end
 
 local function drawPoint(point)
     -- draws the provided point on all four frames
-
     drawTopView(point)
     drawFrontView(point)
     drawSideView(point)
-
+    --! drawIso(point)
 end
 
 function entity.draw(entity)
