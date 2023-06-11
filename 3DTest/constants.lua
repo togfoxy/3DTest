@@ -33,8 +33,34 @@ function constants.load()
     enums.load()
     -- add extra items below this line
 
+    ENTITIES = {}           -- entities contain objects
     OBJECTS = {}
+
+    PLAYER_GUID = nil
+
     ISO_MODE = false
+
+    -- frame data
+    topframex = 5
+    topframey = 5
+    topframewidth = 500
+    topframeheight = 590
+    topframecentrex = topframex + (topframewidth / 2)
+    topframecentrey = topframey + (topframeheight / 2)
+
+    sideframex = 510
+    sideframey = 600
+    sideframewidth = 500
+    sideframeheight = 450
+    sideframecentrex = sideframex + (sideframewidth / 2)
+    sideframecentrey = sideframey + (sideframeheight / 2)
+
+    frontframex = 5
+    frontframey = 600
+    frontframewidth = 500
+    frontframeheight = 450
+    frontframecentrex = frontframewidth / 2 + frontframex
+    frontframecentrey = frontframeheight / 2 + frontframey
 
 end
 

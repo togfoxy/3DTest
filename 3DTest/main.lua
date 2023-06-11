@@ -24,6 +24,7 @@ require 'enums'
 require 'constants'
 fun = require 'functions'
 cf = require 'lib.commonfunctions'
+ent = require 'entity'
 
 require 'threederotation'
 
@@ -72,22 +73,45 @@ function love.load()
 	lovelyToasts.options.queueEnabled = true
 	-- =============================================
 
-	fun.initialiseObject()
-	-- print(inspect(OBJECTS[1]))
-	-- print("*********")
+	ent.initialiseEntities()
+	-- fun.initialiseObject()
+
 end
 
 function love.draw()
     res.start()
 	-- cam:attach()
 
-	fun.drawObjects2()
+	-- fun.drawObjects2()
+
+	-- draw the frames
+	love.graphics.getColor(1,1,1,1)
+	love.graphics.rectangle("line", sideframex, sideframey, sideframewidth, sideframeheight)
+	love.graphics.print("Side", sideframex + 5, sideframey + 5)
+
+    love.graphics.rectangle("line", topframex, topframey, topframewidth, topframeheight)
+	love.graphics.print("Top", topframex + 5, topframey + 5)
+
+	love.graphics.getColor(1,1,1,1)
+	love.graphics.rectangle("line", frontframex, frontframey, frontframewidth, frontframeheight)
+	love.graphics.print("Front", frontframex + 5, frontframey + 5)
+
+	-- cycle through all entities and draw the objects, points and segments within
+    for k, entity in pairs(ENTITIES) do
+		ent.draw(entity)
+    end
 
 	-- cam:detach()
     res.stop()
 end
 
 function love.update(dt)
+
+	--! update the three views
+	-- cycle through all entities and update the four co-ordinates
+	for k, entity in pairs(ENTITIES) do
+		ent.updatePoints(entity)
+	end
 
 	if love.keyboard.isDown("up") then
 		for _, Obj in pairs(OBJECTS) do
