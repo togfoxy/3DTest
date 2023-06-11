@@ -33,7 +33,11 @@ function constants.load()
     enums.load()
     -- add extra items below this line
 
+    ENTITIES = {}           -- entities contain objects
     OBJECTS = {}
+
+    PLAYER_GUID = nil
+
     ISO_MODE = false
 
 end

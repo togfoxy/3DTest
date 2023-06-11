@@ -187,7 +187,144 @@ local function initialisePerson()
     table.insert(thisobject.segments, thissegment)
 
     table.insert(OBJECTS, thisobject)
+end
 
+local function addObjectsToPlayerEntity(playerentity)
+    local thisobject = {}
+    thisobject.points = {}
+    thisobject.segments = {}
+
+    if true then    -- box
+        local thispoint = {}
+        thispoint.x = 600
+        thispoint.y = 700
+        thispoint.z = 0
+        thispoint.label = 1
+        table.insert(thisobject.points, thispoint)
+
+        local thispoint = {}
+        thispoint.x = 300
+        thispoint.y = 800
+        thispoint.z = 0
+        thispoint.label = 2
+        table.insert(thisobject.points, thispoint)
+
+        local thispoint = {}
+        thispoint.x = 300
+        thispoint.y = 700
+        thispoint.z = 0
+        thispoint.label = 3
+        table.insert(thisobject.points, thispoint)
+
+        local thispoint = {}
+        thispoint.x = 600
+        thispoint.y = 800
+        thispoint.z = 0
+        thispoint.label = 4
+        table.insert(thisobject.points, thispoint)
+
+        -- ***  z-plane points
+        local thispoint = {}
+        thispoint.x = 600
+        thispoint.y = 700
+        thispoint.z = 200
+        thispoint.label = 5
+        table.insert(thisobject.points, thispoint)
+
+        local thispoint = {}
+        thispoint.x = 300
+        thispoint.y = 800
+        thispoint.z = 200
+        thispoint.label = 6
+        table.insert(thisobject.points, thispoint)
+
+        local thispoint = {}
+        thispoint.x = 300
+        thispoint.y = 700
+        thispoint.z = 200
+        thispoint.label = 7
+        table.insert(thisobject.points, thispoint)
+
+        local thispoint = {}
+        thispoint.x = 600
+        thispoint.y = 800
+        thispoint.z = 200
+        thispoint.label = 8
+        table.insert(thisobject.points, thispoint)
+    end
+
+    -- line segments
+    if true then
+        local thissegment = {}
+        thissegment.origin = 1              -- the label of the first point
+        thissegment.destination = 3         -- label
+        table.insert(thisobject.segments, thissegment)
+        local thissegment = {}
+        thissegment.origin = 1              -- the label of the first point
+        thissegment.destination = 4         -- label
+        table.insert(thisobject.segments, thissegment)
+        local thissegment = {}
+        thissegment.origin = 1              -- the label of the first point
+        thissegment.destination = 5         -- label
+        table.insert(thisobject.segments, thissegment)
+
+        local thissegment = {}
+        thissegment.origin = 2              -- the label of the first point
+        thissegment.destination = 3         -- label
+        table.insert(thisobject.segments, thissegment)
+        local thissegment = {}
+        thissegment.origin = 2              -- the label of the first point
+        thissegment.destination = 4         -- label
+        table.insert(thisobject.segments, thissegment)
+        local thissegment = {}
+        thissegment.origin = 2              -- the label of the first point
+        thissegment.destination = 6         -- label
+        table.insert(thisobject.segments, thissegment)
+
+        local thissegment = {}
+        thissegment.origin = 3              -- the label of the first point
+        thissegment.destination = 7         -- label
+        table.insert(thisobject.segments, thissegment)
+
+        local thissegment = {}
+        thissegment.origin = 4              -- the label of the first point
+        thissegment.destination = 8         -- label
+        table.insert(thisobject.segments, thissegment)
+
+        local thissegment = {}
+        thissegment.origin = 5              -- the label of the first point
+        thissegment.destination = 7         -- label
+        table.insert(thisobject.segments, thissegment)
+        local thissegment = {}
+        thissegment.origin = 5              -- the label of the first point
+        thissegment.destination = 8         -- label
+        table.insert(thisobject.segments, thissegment)
+
+        local thissegment = {}
+        thissegment.origin = 6              -- the label of the first point
+        thissegment.destination = 7         -- label
+        table.insert(thisobject.segments, thissegment)
+        local thissegment = {}
+        thissegment.origin = 6              -- the label of the first point
+        thissegment.destination = 8         -- label
+        table.insert(thisobject.segments, thissegment)
+    end
+    table.insert(playerentity, thisobject)
+end
+
+function functions.initialiseEntities()
+    -- an entity is like a person and can have many objects. Objects are formed by points and segments
+    local thisentity = {}
+
+    -- add the player entity
+    thisentity.guid = cf.getGUID()
+    PLAYER_GUID = thisentity.guid
+    thisentity.Objects = {}
+
+    addObjectsToPlayerEntity(thisentity)
+
+    table.insert(ENTITIES, thisentity)
+    --! add other entities here
 end
 
 function functions.initialiseObject()

@@ -72,9 +72,9 @@ function love.load()
 	lovelyToasts.options.queueEnabled = true
 	-- =============================================
 
+	fun.initialiseEntities()
 	fun.initialiseObject()
-	-- print(inspect(OBJECTS[1]))
-	-- print("*********")
+
 end
 
 function love.draw()
