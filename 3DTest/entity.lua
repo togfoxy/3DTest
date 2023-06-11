@@ -1,5 +1,27 @@
 entity = {}
 
+local function getPointCoord(pointlabel, view)
+    -- input: pointlabel is a text
+    -- input: view = enum
+
+    if view == nil then error() end
+
+    for i, ent in pairs(ENTITIES) do
+        for k, Obj in pairs(ent.objects) do
+            for j, pt in pairs(Obj.points) do
+                if pt.label == pointlabel then
+                    if view == enum.viewFront then
+                        return pt.frontx, pt.fronty, pt.frontz
+                    elseif view == enum.viewSide then
+                        return pt.sidex, pt.sidey, pt.sidez
+                    elseif view == enum.viewTop then
+                        return pt.topx, pt.topy, pt.topz
+                    end
+                end
+            end
+        end
+    end
+end
 
 local function addObjectsToPlayerEntity(playerentity)
     local thisobject = {}
@@ -256,9 +278,6 @@ local function drawSideView(pt)
 end
 
 local function drawFrontView(pt)
-
-print(inspect(pt))
-
     local drawx = pt.frontx
     local drawy = pt.fronty
 
@@ -266,7 +285,6 @@ print(inspect(pt))
     love.graphics.circle("fill", drawx, drawy, 5)
     -- point label (debugging only)
     love.graphics.print(pt.label, drawx + 7, drawy + 4)
-
 end
 
 local function drawPoint(point)
@@ -277,13 +295,44 @@ local function drawPoint(point)
     --! drawIso(point)
 end
 
+local function drawSegment(seg)
+    local p1 = seg.origin               -- these are labels
+    local p2 = seg.destination          -- these are labels
+
+
+
+    local x1, y1, x2, y2
+    x1, y1, z1 = getPointCoord(p1, enum.viewTop)        -- p1 is a label. translates points for different frames
+    x2, y2, z2 = getPointCoord(p2, enum.viewTop)        -- p1 is a label
+    if x1 ~= nil then                                   --! need to work out how this can be nil
+        love.graphics.setColor(1,1,1,1)
+        love.graphics.line(x1, y1, x2, y2)
+    end
+
+    local x1, y1, x2, y2
+    x1, y1, z1 = getPointCoord(p1, enum.viewFront)        -- p1 is a label. translates points for different frames
+    x2, y2, z2 = getPointCoord(p2, enum.viewFront)        -- p1 is a label
+    if x1 ~= nil then                                   --! need to work out how this can be nil
+        love.graphics.setColor(1,1,1,1)
+        love.graphics.line(x1, y1, x2, y2)
+    end
+
+    local x1, y1, x2, y2
+    x1, y1, z1 = getPointCoord(p1, enum.viewSide)        -- p1 is a label. translates points for different frames
+    x2, y2, z2 = getPointCoord(p2, enum.viewSide)        -- p1 is a label
+    if x1 ~= nil then                                   --! need to work out how this can be nil
+        love.graphics.setColor(1,1,1,1)
+        love.graphics.line(x1, y1, x2, y2)
+    end
+end
+
 function entity.draw(entity)
     for j, object in pairs(entity.objects) do
         for h, point in pairs(object.points) do
             drawPoint(point)
         end
         for h, segment in pairs(object.segments) do
-
+            drawSegment(segment)
         end
     end
 end

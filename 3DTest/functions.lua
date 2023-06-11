@@ -18,126 +18,6 @@ function functions.loadAudio()
     -- AUDIO[enum.audioMainMenu] = love.audio.newSource("assets/audio/XXX.mp3", "stream")
 end
 
-local function initialiseBox()
-    local thisobject = {}
-    thisobject.points = {}
-    thisobject.segments = {}
-
-    local thispoint = {}
-    thispoint.x = 600
-    thispoint.y = 700
-    thispoint.z = 0
-    thispoint.label = 1
-    table.insert(thisobject.points, thispoint)
-
-    local thispoint = {}
-    thispoint.x = 300
-    thispoint.y = 800
-    thispoint.z = 0
-    thispoint.label = 2
-    table.insert(thisobject.points, thispoint)
-
-    local thispoint = {}
-    thispoint.x = 300
-    thispoint.y = 700
-    thispoint.z = 0
-    thispoint.label = 3
-    table.insert(thisobject.points, thispoint)
-
-    local thispoint = {}
-    thispoint.x = 600
-    thispoint.y = 800
-    thispoint.z = 0
-    thispoint.label = 4
-    table.insert(thisobject.points, thispoint)
-
-    -- ***  z-plane points
-    local thispoint = {}
-    thispoint.x = 600
-    thispoint.y = 700
-    thispoint.z = 200
-    thispoint.label = 5
-    table.insert(thisobject.points, thispoint)
-
-    local thispoint = {}
-    thispoint.x = 300
-    thispoint.y = 800
-    thispoint.z = 200
-    thispoint.label = 6
-    table.insert(thisobject.points, thispoint)
-
-    local thispoint = {}
-    thispoint.x = 300
-    thispoint.y = 700
-    thispoint.z = 200
-    thispoint.label = 7
-    table.insert(thisobject.points, thispoint)
-
-    local thispoint = {}
-    thispoint.x = 600
-    thispoint.y = 800
-    thispoint.z = 200
-    thispoint.label = 8
-    table.insert(thisobject.points, thispoint)
-
-    -- line segments
-    local thissegment = {}
-    thissegment.origin = 1              -- the label of the first point
-    thissegment.destination = 3         -- label
-    table.insert(thisobject.segments, thissegment)
-    local thissegment = {}
-    thissegment.origin = 1              -- the label of the first point
-    thissegment.destination = 4         -- label
-    table.insert(thisobject.segments, thissegment)
-    local thissegment = {}
-    thissegment.origin = 1              -- the label of the first point
-    thissegment.destination = 5         -- label
-    table.insert(thisobject.segments, thissegment)
-
-    local thissegment = {}
-    thissegment.origin = 2              -- the label of the first point
-    thissegment.destination = 3         -- label
-    table.insert(thisobject.segments, thissegment)
-    local thissegment = {}
-    thissegment.origin = 2              -- the label of the first point
-    thissegment.destination = 4         -- label
-    table.insert(thisobject.segments, thissegment)
-    local thissegment = {}
-    thissegment.origin = 2              -- the label of the first point
-    thissegment.destination = 6         -- label
-    table.insert(thisobject.segments, thissegment)
-
-    local thissegment = {}
-    thissegment.origin = 3              -- the label of the first point
-    thissegment.destination = 7         -- label
-    table.insert(thisobject.segments, thissegment)
-
-    local thissegment = {}
-    thissegment.origin = 4              -- the label of the first point
-    thissegment.destination = 8         -- label
-    table.insert(thisobject.segments, thissegment)
-
-    local thissegment = {}
-    thissegment.origin = 5              -- the label of the first point
-    thissegment.destination = 7         -- label
-    table.insert(thisobject.segments, thissegment)
-    local thissegment = {}
-    thissegment.origin = 5              -- the label of the first point
-    thissegment.destination = 8         -- label
-    table.insert(thisobject.segments, thissegment)
-
-    local thissegment = {}
-    thissegment.origin = 6              -- the label of the first point
-    thissegment.destination = 7         -- label
-    table.insert(thisobject.segments, thissegment)
-    local thissegment = {}
-    thissegment.origin = 6              -- the label of the first point
-    thissegment.destination = 8         -- label
-    table.insert(thisobject.segments, thissegment)
-
-    table.insert(OBJECTS, thisobject)
-end
-
 local function getPointCoord(pointlabel, view)
     -- input: pointlabel is a text
     -- input: view = enum
@@ -260,6 +140,8 @@ local function drawTopView()
             love.graphics.print(pt.label, drawx + 7, drawy + 4)
         end
 
+
+
         -- draw segments
         for k, seg in pairs(Obj.segments) do
         --
@@ -375,9 +257,7 @@ local function drawSideView()
             local x1, y1, x2, y2
             x1, y1, z1 = getPointCoord(p1, enum.viewSide)        -- p1 is a label
             x2, y2, z2 = getPointCoord(p2, enum.viewSide)        -- p1 is a label
-        --
 
-        --
             if x1 ~= nil then
                 love.graphics.setColor(1,1,1,1)
                 love.graphics.line(x1, y1, x2, y2)
@@ -385,22 +265,5 @@ local function drawSideView()
         end
     end
 end
-
-function functions.drawObjects2()
-
-    -- draw side view at bottom of screen
-    drawSideView()
-
-    -- draw top down view in top left corner of screen
-    drawTopView()
-
-    -- draw the forward view in bottom left of screen
-    drawFrontView()
-
-
-    -- draw iso top right corner of screen
-end
-
-
 
 return functions
