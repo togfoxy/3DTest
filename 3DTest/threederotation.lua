@@ -1,7 +1,13 @@
 threederotation = {}
 
 function threederotation.getObjectCentre(Obj)
+    -- returns x/y/z
     local sumx, sumy, sumz, sumpoints = 0,0,0,0
+
+    if Obj.points == nil then
+        -- print(inspect(Obj))
+        -- error()
+    end
 
     for j, pt in pairs(Obj.points) do
         sumx = sumx + pt.x
@@ -124,7 +130,8 @@ function threederotation.rotatePointZAxis(point, angle)
     return x2, y2, z2
 end
 
-function threederotation.changeObjectToIsometric(Obj)
+function threederotation.updateIsoView(Obj)
+    -- returns nothing
     for j, pt in pairs(Obj.points) do
 
         pt.isox = (pt.x - pt.z) / math.sqrt(2)

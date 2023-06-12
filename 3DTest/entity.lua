@@ -236,7 +236,7 @@ local function updateFrontView(Obj)
     local offsetx = frontframecentrex - centrex
     local offsety = frontframecentrey - centrey
 
-    -- draw points
+    -- update points
     for j, pt in pairs(Obj.points) do
         local drawx = pt.x + offsetx
         local drawy = pt.y + offsety
@@ -245,15 +245,21 @@ local function updateFrontView(Obj)
     end
 end
 
-function entity.updatePoints(entity)
-    -- updates all the translations so they are ready for draw()
-    for j, object in pairs(entity.objects) do
-        updateSideView(object)
-        updateTopView(object)
-        updateFrontView(object)         -- the front view is the native view so no translation needed
-        --! update iso view
+local function updateIsoView(Obj)
+
+    threederotation.updateIsoView(Obj)      -- transforms raw to iso but doesn't offset to frame
+
+    local objx, objy, objz = threederotation.getObjectCentre(Obj)
+    local offsetx = isoframecentrex - objx
+    local offsety = isoframecentrey - objy
+
+    -- update points
+    for j, pt in pairs(Obj.points) do
+        pt.isox = pt.isox + offsetx
+        pt.isoy = pt.isoy + offsety
     end
 end
+
 
 local function drawTopView(pt)
     -- draws one point
@@ -287,12 +293,20 @@ local function drawFrontView(pt)
     love.graphics.print(pt.label, drawx + 7, drawy + 4)
 end
 
+local function drawIsoView(pt)
+    love.graphics.setColor(1,1,1,1)
+    love.graphics.circle("fill", pt.isox, pt.isoy, 5)
+    if DEV_MODE then
+        love.graphics.print(pt.label, pt.isox + 7, pt.isoy + 4)
+    end
+end
+
 local function drawPoint(point)
     -- draws the provided point on all four frames
     drawTopView(point)
     drawFrontView(point)
     drawSideView(point)
-    --! drawIso(point)
+    drawIsoView(point)
 end
 
 local function drawSegment(seg)
@@ -334,6 +348,16 @@ function entity.draw(entity)
         for h, segment in pairs(object.segments) do
             drawSegment(segment)
         end
+    end
+end
+
+function entity.updatePoints(entity)
+    -- updates all the translations so they are ready for draw()
+    for j, object in pairs(entity.objects) do
+        updateSideView(object)
+        updateTopView(object)
+        updateFrontView(object)         -- the front view is the native view so no translation needed
+        updateIsoView(object)
     end
 end
 

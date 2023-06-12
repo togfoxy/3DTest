@@ -119,10 +119,18 @@ function love.update(dt)
 	end
 
 	if love.keyboard.isDown("left") then
-		threederotation.rotateObjectYAxis(OBJECTS[1], -1)
+		for k, entity in pairs(ENTITIES) do
+			for j, object in pairs(entity.objects) do
+				threederotation.rotateObjectYAxis(object, -1)
+			end
+		end
 	end
 	if love.keyboard.isDown("right") then
-		threederotation.rotateObjectYAxis(OBJECTS[1], 1)
+		for k, entity in pairs(ENTITIES) do
+			for j, object in pairs(entity.objects) do
+				threederotation.rotateObjectYAxis(object, 1)
+			end
+		end
 	end
 
 	if love.keyboard.isDown("delete") then
