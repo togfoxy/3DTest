@@ -134,8 +134,8 @@ function threederotation.updateIsoView(Obj)
     -- returns nothing
     for j, pt in pairs(Obj.points) do
 
-        pt.isox = (pt.x - pt.z) / math.sqrt(2)
-        pt.isoy = (pt.x + 2 * pt.y + pt.z) / math.sqrt(6)
+        pt.isox = (pt.x - (pt.z * -1)) / math.sqrt(2)
+        pt.isoy = (pt.x + 2 * pt.y + (pt.z * -1)) / math.sqrt(6)
 
     end
 end

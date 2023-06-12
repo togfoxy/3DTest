@@ -18,16 +18,4 @@ function functions.loadAudio()
     -- AUDIO[enum.audioMainMenu] = love.audio.newSource("assets/audio/XXX.mp3", "stream")
 end
 
-local function getIsoPointCoord(pointlabel)
-    -- input: pointlabel is a text
-
-    for k, Obj in pairs(OBJECTS) do
-        for j, pt in pairs(Obj.points) do
-            if pt.label == pointlabel then
-                return pt.isox, pt.isoy, pt.isoz
-            end
-        end
-    end
-end
-
 return functions
