@@ -16,6 +16,8 @@ local function getPointCoord(pointlabel, view)
                         return pt.sidex, pt.sidey, pt.sidez
                     elseif view == enum.viewTop then
                         return pt.topx, pt.topy, pt.topz
+                    elseif view == enum.viewIso then
+                        return pt.isox, pt.isoy, pt.isoz
                     end
                 end
             end
@@ -260,7 +262,6 @@ local function updateIsoView(Obj)
     end
 end
 
-
 local function drawTopView(pt)
     -- draws one point
     local drawx = pt.topx
@@ -313,8 +314,6 @@ local function drawSegment(seg)
     local p1 = seg.origin               -- these are labels
     local p2 = seg.destination          -- these are labels
 
-
-
     local x1, y1, x2, y2
     x1, y1, z1 = getPointCoord(p1, enum.viewTop)        -- p1 is a label. translates points for different frames
     x2, y2, z2 = getPointCoord(p2, enum.viewTop)        -- p1 is a label
@@ -338,6 +337,15 @@ local function drawSegment(seg)
         love.graphics.setColor(1,1,1,1)
         love.graphics.line(x1, y1, x2, y2)
     end
+
+    -- iso view
+    local x1, y1, x2, y2
+    x1, y1, z1 = getPointCoord(p1, enum.viewIso)        -- p1 is a label. translates points for different frames
+    x2, y2, z2 = getPointCoord(p2, enum.viewIso)        -- p1 is a label
+    if x1 ~= nil then                                   --! need to work out how this can be nil
+        love.graphics.setColor(1,1,1,1)
+        love.graphics.line(x1, y1, x2, y2)
+    end
 end
 
 function entity.draw(entity)
@@ -346,7 +354,7 @@ function entity.draw(entity)
             drawPoint(point)
         end
         for h, segment in pairs(object.segments) do
-            drawSegment(segment)
+            drawSegment(segment)            -- draw all segments for all frames
         end
     end
 end
