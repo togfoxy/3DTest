@@ -74,25 +74,20 @@ function love.load()
 	-- =============================================
 
 	ent.initialiseEntities()
-	-- fun.initialiseObject()
-
 end
 
 function love.draw()
     res.start()
 	-- cam:attach()
 
-	-- fun.drawObjects2()
-
 	-- draw the frames
-	love.graphics.getColor(1,1,1,1)
+	love.graphics.getColor(1,1,1,0.25)
 	love.graphics.rectangle("line", sideframex, sideframey, sideframewidth, sideframeheight)
 	love.graphics.print("Side", sideframex + 5, sideframey + 5)
 
     love.graphics.rectangle("line", topframex, topframey, topframewidth, topframeheight)
 	love.graphics.print("Top", topframex + 5, topframey + 5)
 
-	love.graphics.getColor(1,1,1,1)
 	love.graphics.rectangle("line", frontframex, frontframey, frontframewidth, frontframeheight)
 	love.graphics.print("Front", frontframex + 5, frontframey + 5)
 
