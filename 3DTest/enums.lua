@@ -21,6 +21,7 @@ function enums.load()
     enum.viewFront = 1
     enum.viewSide = 2
     enum.viewTop = 3
+    enum.viewIso = 4
 
 
 

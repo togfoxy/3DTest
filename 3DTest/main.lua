@@ -74,25 +74,20 @@ function love.load()
 	-- =============================================
 
 	ent.initialiseEntities()
-	-- fun.initialiseObject()
-
 end
 
 function love.draw()
     res.start()
 	-- cam:attach()
 
-	-- fun.drawObjects2()
-
 	-- draw the frames
-	love.graphics.getColor(1,1,1,1)
+	love.graphics.getColor(1,1,1,0.25)
 	love.graphics.rectangle("line", sideframex, sideframey, sideframewidth, sideframeheight)
 	love.graphics.print("Side", sideframex + 5, sideframey + 5)
 
     love.graphics.rectangle("line", topframex, topframey, topframewidth, topframeheight)
 	love.graphics.print("Top", topframex + 5, topframey + 5)
 
-	love.graphics.getColor(1,1,1,1)
 	love.graphics.rectangle("line", frontframex, frontframey, frontframewidth, frontframeheight)
 	love.graphics.print("Front", frontframex + 5, frontframey + 5)
 
@@ -124,10 +119,18 @@ function love.update(dt)
 	end
 
 	if love.keyboard.isDown("left") then
-		threederotation.rotateObjectYAxis(OBJECTS[1], -1)
+		for k, entity in pairs(ENTITIES) do
+			for j, object in pairs(entity.objects) do
+				threederotation.rotateObjectYAxis(object, -1)
+			end
+		end
 	end
 	if love.keyboard.isDown("right") then
-		threederotation.rotateObjectYAxis(OBJECTS[1], 1)
+		for k, entity in pairs(ENTITIES) do
+			for j, object in pairs(entity.objects) do
+				threederotation.rotateObjectYAxis(object, 1)
+			end
+		end
 	end
 
 	if love.keyboard.isDown("delete") then

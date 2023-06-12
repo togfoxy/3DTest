@@ -38,7 +38,7 @@ function constants.load()
 
     PLAYER_GUID = nil
 
-    ISO_MODE = false
+    DEV_MODE = true             --! move to love.load()
 
     -- frame data
     topframex = 5
@@ -62,6 +62,8 @@ function constants.load()
     frontframecentrex = frontframewidth / 2 + frontframex
     frontframecentrey = frontframeheight / 2 + frontframey
 
+    isoframecentrex = 1100
+    isoframecentrey = 300
 end
 
 return constants
