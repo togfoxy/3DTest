@@ -83,13 +83,17 @@ function love.draw()
 	-- draw the frames
 	love.graphics.getColor(1,1,1,0.25)
 	love.graphics.rectangle("line", sideframex, sideframey, sideframewidth, sideframeheight)
-	love.graphics.print("Side", sideframex + 5, sideframey + 5)
+	love.graphics.print("Side  <--z--> ", sideframex + 5, sideframey + 5)
 
     love.graphics.rectangle("line", topframex, topframey, topframewidth, topframeheight)
-	love.graphics.print("Top", topframex + 5, topframey + 5)
+	love.graphics.print("Top  <--x-->", topframex + 5, topframey + 5)
+	love.graphics.print(" ^", topframex + 10, topframey + 20)
+	love.graphics.print(" |", topframex + 13, topframey + 30)
+	love.graphics.print(" |", topframex + 13, topframey + 50)
+	love.graphics.print(" y", topframex + 13, topframey + 65)
 
 	love.graphics.rectangle("line", frontframex, frontframey, frontframewidth, frontframeheight)
-	love.graphics.print("Front", frontframex + 5, frontframey + 5)
+	love.graphics.print("Front  <--x-->  ", frontframex + 5, frontframey + 5)
 
 	-- cycle through all entities and draw the objects, points and segments within
     for k, entity in pairs(ENTITIES) do
@@ -107,6 +111,7 @@ function love.update(dt)
 	for k, entity in pairs(ENTITIES) do
 		ent.updatePoints(entity)
 	end
+
 
 	if love.keyboard.isDown("up") then
 		for _, Obj in pairs(OBJECTS) do
